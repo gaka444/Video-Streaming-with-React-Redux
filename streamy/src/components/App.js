@@ -1,4 +1,4 @@
-import { BrowserRouter, Router, Route, Routes } from "react-router-dom";
+import { Router, Route, Switch} from "react-router-dom";
 import StreamList from "./streams/StreamList";
 import React from "react";
 import StreamCreate from "./streams/SteamCreate";
@@ -7,41 +7,21 @@ import StreamDelete from "./streams/StreamDelete";
 import StreamEdit from "./streams/StreamEdit";
 import Header from "./Header";
 import history from '../history';
-import { useLayoutEffect, useState } from "react";
-
-
-const CustomRouter = ({ history, ...props }) => {
-  const [state, setState] = useState({
-    action: history.action,
-    location: history.location
-  });
-
-  useLayoutEffect(() => history.listen(setState), [history]);
-
-  return (
-    <Router
-      {...props}
-      location={state.location}
-      navigationType={state.action}
-      navigator={history}
-    />
-  );
-};
 
 
 export default function App() {
   return (
     <div className="ui container">
-      <CustomRouter history={history}>
+      <Router history={history}>
         <Header />
-        <Routes>
-          <Route path="/" exact element={<StreamList />} />
-          <Route path="/streams/new" element={<StreamCreate />} />
-          <Route path="/streams/show" element={<StreamShow />} />
-          <Route path="/streams/delete" element={<StreamDelete />} />
-          <Route path="/streams/edit/:id" element={<StreamEdit />} />
-        </Routes>
-      </CustomRouter>
+        <Switch>
+          <Route path="/" exact component={StreamList} />
+          <Route path="/streams/new" component={StreamCreate} />
+          <Route path="/streams/show" component={StreamShow} />
+          <Route path="/streams/delete" component={StreamDelete} />
+          <Route path="/streams/edit/:id" component={StreamEdit} />
+        </Switch>
+      </Router>
     </div>
   );
 }
