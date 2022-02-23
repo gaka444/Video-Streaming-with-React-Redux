@@ -1,9 +1,16 @@
 {
   "streams": [
     {
-      "title": "dem",
-      "description": "flem",
+      "title": "hello ",
+      "description": "world",
+      "userId": "101680371990164299992",
       "id": 1
+    },
+    {
+      "title": "some ",
+      "description": "world",
+      "userId": "101680371990164299992",
+      "id": 2
     }
   ]
 }
